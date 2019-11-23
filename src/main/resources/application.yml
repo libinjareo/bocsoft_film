@@ -6,7 +6,7 @@ mybatis-plus:
       id-type: auto
 spring:
   datasource:
-    url: jdbc:mysql://192.168.1.7/film?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://192.168.239.133/film?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
     username: root
     password: root
     druid:
