@@ -16,6 +16,8 @@ spring:
 logging:
   level.root: info
   level.com.binsoft.film: debug
+server:
+  port: 8080
 
 
 

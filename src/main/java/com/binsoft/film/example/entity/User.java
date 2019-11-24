@@ -1,4 +1,4 @@
-package com.binsoft.film.example.dao.entity;
+package com.binsoft.film.example.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
