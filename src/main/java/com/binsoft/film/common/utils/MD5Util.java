@@ -3,9 +3,17 @@ package com.binsoft.film.common.utils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * MD5加密工具类
+ */
 public final class MD5Util {
 
 
+    /**
+     * 加密
+     * @param source
+     * @return
+     */
     public static String encrypt(String source) {
         return encodeMd5(source.getBytes());
     }

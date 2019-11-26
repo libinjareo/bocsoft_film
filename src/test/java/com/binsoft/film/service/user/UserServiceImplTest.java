@@ -60,7 +60,17 @@ class UserServiceImplTest {
     }
 
     @Test
-    void updateUserInfo() {
+    void updateUserInfo() throws CommonServiceException {
+
+        UserInfoVO u = new UserInfoVO();
+        u.setUuid(Integer.parseInt("4"));
+        u.setNickName("修仙者");
+        u.setUserName("binsoft-Nirvana");
+
+        UserInfoVO userInfoVO = userService.updateUserInfo(u);
+
+        System.out.println(userInfoVO);
+
     }
 
 }

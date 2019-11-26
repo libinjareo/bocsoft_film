@@ -3,6 +3,7 @@ package com.binsoft.film.service.user;
 import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.binsoft.film.common.utils.MD5Util;
+import com.binsoft.film.common.utils.RegexUtil;
 import com.binsoft.film.controller.user.vo.EnrollUserVO;
 import com.binsoft.film.controller.user.vo.UserInfoVO;
 import com.binsoft.film.dao.entity.NextUserT;
@@ -13,8 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
+import java.util.Optional;
 
 @Service("userService")
 public class UserServiceImpl implements UserServiceAPI {
@@ -79,14 +82,29 @@ public class UserServiceImpl implements UserServiceAPI {
             UserInfoVO userInfoVO = tuser2InfoVO(nextUserT);
             return userInfoVO;
         } else {
-            throw new CommonServiceException(404, "编号为【" + userId + "】的用户不存在!");
+            throw new CommonServiceException(400, "编号为【" + userId + "】的用户不存在!");
         }
 
     }
 
     @Override
     public UserInfoVO updateUserInfo(UserInfoVO userInfoVO) throws CommonServiceException {
-        return null;
+        NextUserT nextUserT = infoVO2TUser(userInfoVO);
+        if (nextUserT != null && nextUserT.getUuid() != null) {
+            int isSuccess = userMapper.updateById(nextUserT);
+            if (isSuccess == 1) {
+                UserInfoVO result = describeUserInfo(userInfoVO.getUuid() + "");
+                return result;
+            } else {
+                throw new CommonServiceException(500, "用户信息修改失败!");
+            }
+
+
+        } else {
+            throw new CommonServiceException(404, "用户编号为【" + userInfoVO.getUuid() + "】的用户不存在");
+        }
+
+
     }
 
     private UserInfoVO tuser2InfoVO(NextUserT nextUserT) {
@@ -99,5 +117,23 @@ public class UserServiceImpl implements UserServiceAPI {
         userInfoVO.setUpdateTime(nextUserT.getUpdateTime().toEpochSecond(ZoneOffset.of("+8")));
 
         return userInfoVO;
+    }
+
+    private NextUserT infoVO2TUser(UserInfoVO userInfoVO) {
+        NextUserT nextUserT = new NextUserT();
+
+        if (Optional.ofNullable(userInfoVO.getLifeState()).isPresent()) {
+            if (RegexUtil.isNumeric(userInfoVO.getLifeState())) {
+                nextUserT.setLifeState(Integer.parseInt(userInfoVO.getLifeState()));
+            }
+        }
+
+        BeanUtils.copyProperties(userInfoVO, nextUserT);
+
+
+        nextUserT.setUpdateTime(LocalDateTime.now());
+
+        return nextUserT;
+
     }
 }
