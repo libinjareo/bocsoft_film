@@ -122,6 +122,15 @@ public class UserServiceImpl implements UserServiceAPI {
     private NextUserT infoVO2TUser(UserInfoVO userInfoVO) {
         NextUserT nextUserT = new NextUserT();
 
+        if(Optional.ofNullable(userInfoVO.getId()).isPresent()){
+            nextUserT.setUuid(userInfoVO.getId());
+        }
+
+        if(Optional.ofNullable(userInfoVO.getUuid()).isPresent()){
+            nextUserT.setUuid(userInfoVO.getUuid());
+        }
+
+
         if (Optional.ofNullable(userInfoVO.getLifeState()).isPresent()) {
             if (RegexUtil.isNumeric(userInfoVO.getLifeState())) {
                 nextUserT.setLifeState(Integer.parseInt(userInfoVO.getLifeState()));

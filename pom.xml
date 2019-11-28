@@ -112,6 +112,13 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.56</version>
 		</dependency>
+
+		<!-- JWT依赖 -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>

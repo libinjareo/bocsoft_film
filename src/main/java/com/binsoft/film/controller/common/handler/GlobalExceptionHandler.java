@@ -2,6 +2,7 @@ package com.binsoft.film.controller.common.handler;
 
 import com.binsoft.film.controller.common.BaseResponseVO;
 import com.binsoft.film.controller.exception.FilmException;
+import com.binsoft.film.controller.exception.ParameterException;
 import com.binsoft.film.service.common.exception.CommonServiceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -33,4 +34,14 @@ public class GlobalExceptionHandler {
     public BaseResponseVO exception(ExceptionHandler e) {
         return BaseResponseVO.systemError();
     }
+
+
+    @ExceptionHandler(ParameterException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public BaseResponseVO parameterException(ParameterException e) {
+        return BaseResponseVO.failed(e.getCode(), e.getErrMsg());
+    }
+
+
 }
