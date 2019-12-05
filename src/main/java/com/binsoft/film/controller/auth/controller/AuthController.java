@@ -2,6 +2,7 @@ package com.binsoft.film.controller.auth.controller;
 
 import com.binsoft.film.controller.auth.controller.vo.AuthRequestVO;
 import com.binsoft.film.controller.auth.controller.vo.AuthResponseVO;
+import com.binsoft.film.controller.auth.util.JwtTokenUtil;
 import com.binsoft.film.controller.common.BaseResponseVO;
 import com.binsoft.film.controller.exception.ParameterException;
 import com.binsoft.film.service.common.exception.CommonServiceException;
@@ -18,6 +19,9 @@ public class AuthController {
     @Autowired
     private UserServiceAPI userServiceAPI;
 
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+
     @RequestMapping(value = "auth", method = RequestMethod.POST)
     public BaseResponseVO auth(@RequestBody AuthRequestVO authRequestVO) throws ParameterException, CommonServiceException {
         authRequestVO.checkParam();
@@ -25,9 +29,11 @@ public class AuthController {
         boolean isValid = userServiceAPI.useAuth(authRequestVO.getUserName(), authRequestVO.getPassword());
 
         if (isValid) {
+            String randomKey = jwtTokenUtil.getRandomKey();
+            String token = jwtTokenUtil.generateToken(authRequestVO.getUserName(), randomKey);
 
-            AuthResponseVO authResponseVO = AuthResponseVO.builder().randomKey("").token("").build();
-            return BaseResponseVO.success(authRequestVO);
+            AuthResponseVO authResponseVO = AuthResponseVO.builder().randomKey(randomKey).token(token).build();
+            return BaseResponseVO.success(authResponseVO);
         } else {
             return BaseResponseVO.failed(1, "用户名或密码错误！");
         }

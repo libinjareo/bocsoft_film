@@ -1,3 +1,8 @@
+jwt:
+  header:Authorization
+  secret:mySecret
+  expiration:604800
+  md5-key:randomKey
 
 mybatis-plus:
   mapper-locations: classpath*:com/binsoft/film/**/xml/*Mapper.xml

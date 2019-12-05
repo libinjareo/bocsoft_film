@@ -107,6 +107,24 @@ public class UserServiceImpl implements UserServiceAPI {
 
     }
 
+    @Override
+    public String getUserIdByName(String userName) throws CommonServiceException {
+
+        AbstractWrapper queryMappper = new QueryWrapper<NextUserT>();
+        queryMappper.eq("user_name", userName);
+
+        String userId = "";
+
+        List list = userMapper.selectList(queryMappper);
+        if (list != null || list.size() > 0) {
+            NextUserT nextUserT = (NextUserT) list.get(0);
+            userId = nextUserT.getUuid() + "";
+
+        }
+
+        return userId;
+    }
+
     private UserInfoVO tuser2InfoVO(NextUserT nextUserT) {
         UserInfoVO userInfoVO = new UserInfoVO();
 
@@ -122,11 +140,11 @@ public class UserServiceImpl implements UserServiceAPI {
     private NextUserT infoVO2TUser(UserInfoVO userInfoVO) {
         NextUserT nextUserT = new NextUserT();
 
-        if(Optional.ofNullable(userInfoVO.getId()).isPresent()){
+        if (Optional.ofNullable(userInfoVO.getId()).isPresent()) {
             nextUserT.setUuid(userInfoVO.getId());
         }
 
-        if(Optional.ofNullable(userInfoVO.getUuid()).isPresent()){
+        if (Optional.ofNullable(userInfoVO.getUuid()).isPresent()) {
             nextUserT.setUuid(userInfoVO.getUuid());
         }
 
@@ -145,4 +163,5 @@ public class UserServiceImpl implements UserServiceAPI {
         return nextUserT;
 
     }
+
 }

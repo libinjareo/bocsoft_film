@@ -50,4 +50,12 @@ public interface UserServiceAPI {
      */
     UserInfoVO updateUserInfo(UserInfoVO userInfoVO) throws CommonServiceException;
 
+    /**
+     * 根据用户名取得用户ID
+     * @param userName
+     * @return
+     * @throws CommonServiceException
+     */
+    String getUserIdByName(String userName) throws CommonServiceException;
+
 }
