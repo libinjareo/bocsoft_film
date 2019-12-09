@@ -4,6 +4,9 @@ jwt:
   expiration:604800
   md5-key:randomKey
 
+rest:
+  auth-open: true #如果为true,则开启JWT的验证
+
 mybatis-plus:
   mapper-locations: classpath*:com/binsoft/film/**/xml/*Mapper.xml
   global-config:

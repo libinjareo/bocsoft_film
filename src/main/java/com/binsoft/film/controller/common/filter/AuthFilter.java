@@ -40,6 +40,7 @@ public class AuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         if(request.getServletPath().equals("/auth")
                 || request.getServletPath().equals("/film/user/register")
+                || request.getServletPath().equals("/film/user/check")
                 || request.getServletPath().equals("/swagger-ui.html")
                 || request.getServletPath().startsWith("/swagger-resources")
                 || request.getServletPath().startsWith("/v2/api-docs")
@@ -79,6 +80,7 @@ public class AuthFilter extends OncePerRequestFilter {
 
 
         }else{
+            //header没有带Bearer字段
             renderJson(response,BaseResponseVO.noLogin());//用户未登录
             return;
         }

@@ -43,8 +43,8 @@ public class UserController {
         }
     }
 
-    @ApiOperation(value="用户注册",notes = "用户注册")
-    @ApiImplicitParam(name="enrollUserVO",value="注册用户信息",paramType = "body",required = true,dataType = "EnrollUserVO")
+    @ApiOperation(value="用户信息注册",notes = "用户注册：用户名、密码和手机号必须填写")
+    @ApiImplicitParam(name="enrollUserVO",value="注册用户信息",required = true,dataType = "EnrollUserVO")
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public BaseResponseVO register(@RequestBody EnrollUserVO enrollUserVO) throws ParameterException, CommonServiceException {
         enrollUserVO.checkParam();
