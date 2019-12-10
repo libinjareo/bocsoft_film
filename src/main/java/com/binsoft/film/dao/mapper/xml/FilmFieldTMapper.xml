@@ -13,4 +13,72 @@
         <result column="hall_name" property="hallName" />
         <result column="price" property="price" />
     </resultMap>
+    
+    <resultMap id="fieldListMap" type="com.binsoft.film.controller.cinema.vo.CinemaFilmVO">
+        <result property="filmId" column="film_id"></result>
+        <result property="filmName" column="film_name"></result>
+        <result property="filmLength" column="film_length"></result>
+        <result property="filmType" column="film_language"></result>
+        <result property="filmCats" column="film_cats"></result>
+        <result property="actors" column="actors"></result>
+        <result property="imgAddress" column="img_address"></result>
+        <collection property="filmFields" ofType="com.binsoft.film.controller.cinema.vo.FilmFieldVO">
+            <result property="fieldId" column="UUID"></result>
+            <result property="beginTime" column="begin_time"></result>
+            <result property="endTime" column="end_time"></result>
+            <result property="language" column="language"></result>
+            <result property="hallName" column="hall_name"></result>
+            <result property="price" column="price"></result>
+        </collection>
+    </resultMap>
+    
+    <select id="describeFieldList" parameterType="java.util.Map" resultMap="fieldListMap">
+      SELECT
+          info.`film_id`,
+          info.`film_name`,
+          info.`film_length`,
+          info.`film_language`,
+          info.`film_cats`,
+          info.`actors`,
+          info.`img_address`,
+          ff.`UUID`,
+          ff.`begin_time`,
+          ff.`end_time`,
+          info.`film_language` AS `filmType`,
+          ff.`hall_name`,
+          ff.`price`
+      FROM film_field_t ff
+      LEFT JOIN film_hall_film_info_t info
+      ON ff.`film_id` = info.`film_id`
+      WHERE ff.`cinema_id`=#{cinemaId}
+
+    </select>
+
+    <select id="describeFilmInfoByFieldId" parameterType="java.util.Map" resultType="com.binsoft.film.controller.cinema.vo.CinemaFilmInfoVO">
+      SELECT
+          info.`film_id`,
+          info.`film_name`,
+          info.`film_length`,
+          info.`film_language` as `language`,
+          info.`film_cats`,
+          info.`actors`,
+          info.`img_address`
+      FROM film_field_t ff
+      LEFT JOIN film_hall_film_info_t info
+      ON ff.`film_id` = info.`film_id`
+      WHERE ff.`UUID`=#{fieldId}
+    </select>
+
+    <select id="describeHallInfo" parameterType="java.util.Map" resultType="com.binsoft.film.controller.cinema.vo.FieldHallInfoVO">
+      SELECT
+          ff.`UUID` AS hallFieldId,
+          ff.`hall_name` AS hallName,
+          ff.`price` AS price,
+          dict.`seat_address` AS seatFile
+      FROM
+      film_field_t ff LEFT JOIN film_hall_dict_t dict ON ff.`hall_id` = dict.`UUID`
+      WHERE
+      ff.`UUID` = #{fieldId}
+    </select>
+    
 </mapper>
