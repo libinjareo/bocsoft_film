@@ -10,6 +10,7 @@ import com.binsoft.film.controller.cinema.vo.condition.HallTypeResVO;
 import com.binsoft.film.controller.cinema.vo.request.DescribeCinemaRequestVO;
 import com.binsoft.film.dao.entity.FilmCinemaT;
 import com.binsoft.film.dao.mapper.*;
+import com.binsoft.film.service.common.ConditionTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,6 +68,16 @@ public class CinemaServiceImpl implements CinemaServiceAPI {
         cinemaPage.setRecords(cinemas);
 
         return cinemaPage;
+    }
+
+    @Override
+    public boolean checkCondition(int conditionId, String conditionType) {
+
+        switch(conditionType){
+          //  case ConditionTypeEnum.BRAND.getType():
+
+        }
+        return false;
     }
 
     @Override

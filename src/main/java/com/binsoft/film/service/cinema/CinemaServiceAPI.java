@@ -19,6 +19,7 @@ public interface CinemaServiceAPI {
     Page<CinemaVO> describeCinemaInfo(DescribeCinemaRequestVO describeCinemaRequestVO);
 
     //----------------------------以下为获取查询条件----------------
+    boolean checkCondition(int conditionId,String conditionType);
     List<BrandResVO> describeBrandConditions(int brandId);
     List<AreaResVO>  describeAreaConditions(int areaId);
     List<HallTypeResVO> describeHallTypeConditions(int hallTypeId);
