@@ -16,4 +16,17 @@ public enum ConditionTypeEnum {
         this.type = type;
     }
 
+    /**
+     * 根据type 取得相应枚举
+     * @param type
+     * @return
+     */
+    public static ConditionTypeEnum getTypeEnum(String type){
+        for(ConditionTypeEnum enums : ConditionTypeEnum.values()){
+            if(enums.getType().equals(type)){
+                return enums;
+            }
+        }
+        return null;
+    }
 }

@@ -1,5 +1,6 @@
 package com.binsoft.film.controller.cinema.vo;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;

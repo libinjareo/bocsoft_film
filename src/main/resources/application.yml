@@ -28,5 +28,8 @@ logging:
 server:
   port: 8080
 
+film:
+  img-pre:http://img.binfilm.cn/
+
 
 

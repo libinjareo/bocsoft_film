@@ -36,7 +36,7 @@ public interface CinemaServiceAPI {
      * @param cinemaId
      * @return
      */
-    Page<CinemaFilmVO> describeFieldsAndFilmInfo(String cinemaId);
+    List<CinemaFilmVO> describeFieldsAndFilmInfo(String cinemaId);
 
     /**
      * 根据场次编号，获取电影信息
