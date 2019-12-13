@@ -27,6 +27,13 @@
       detail.`film_score` AS score,
       detail.`film_score_num` AS scoreNum,
       info.`film_box_office` AS totalBox,
+      (SELECT GROUP_CONCAT(show_name SEPARATOR,`,`)
+      FROM film_cat_dict_t cat
+      WHERE FIND_IN_SET (cat.`UUID`,(
+      SELECT
+      REPLACE(TRIM (BOTH '#' FROM film.film_cats),`#`,`,`)
+      FROM film_info_t film WHERE film.`UUID`=info.uuid
+      ))) AS info01
       FROM
       film_info_t info left join film_detail_t detail ON info.`UUID` = detail.`film_id`
       WHERE info.`UUID` = #{filmId}
