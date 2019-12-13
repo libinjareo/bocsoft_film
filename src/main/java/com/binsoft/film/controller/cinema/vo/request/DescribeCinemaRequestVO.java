@@ -12,8 +12,9 @@ public class DescribeCinemaRequestVO extends BaseVO {
     private Integer brandId = 99;
     private Integer hallType = 99;
     private Integer districtId = 99;
-    private Integer pageSize = 20;
-    private Integer nowpage = 1;
+    private Long pageSize = 20l;
+    private Long nowpage = 1l;
+
 
 
     @Override

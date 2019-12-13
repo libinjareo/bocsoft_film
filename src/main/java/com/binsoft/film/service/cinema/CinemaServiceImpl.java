@@ -119,7 +119,9 @@ public class CinemaServiceImpl implements CinemaServiceAPI {
             BrandResVO brandResVO = new BrandResVO();
 
             if (brandId == data.getUuid()) {
-                brandResVO.setActive(true);
+                brandResVO.setIsActive("true");
+            }else{
+                brandResVO.setIsActive("false");
             }
             brandResVO.setBrandId(brandId + "");
             brandResVO.setBrandName(data.getShowName());
@@ -137,7 +139,9 @@ public class CinemaServiceImpl implements CinemaServiceAPI {
         List<AreaResVO> collect = filmAreaDictTS.stream().map((data) -> {
             AreaResVO areaResVO = new AreaResVO();
             if (areaId == data.getUuid()) {
-                areaResVO.setActive(true);
+                areaResVO.setIsActive("true");
+            }else{
+                areaResVO.setIsActive("false");
             }
             areaResVO.setAreaId(areaId + "");
             areaResVO.setAreaName(data.getShowName());
@@ -156,7 +160,9 @@ public class CinemaServiceImpl implements CinemaServiceAPI {
         List<HallTypeResVO> collect = filmHallDictTS.stream().map((data) -> {
             HallTypeResVO hallTypeResVO = new HallTypeResVO();
             if (hallTypeId == data.getUuid()) {
-                hallTypeResVO.setActive(true);
+                hallTypeResVO.setIsActive("true");
+            }else{
+                hallTypeResVO.setIsActive("false");
             }
             hallTypeResVO.setHalltypeId(hallTypeId + "");
             hallTypeResVO.setHalltypeName(data.getShowName());
