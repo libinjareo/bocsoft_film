@@ -10,7 +10,13 @@
     </resultMap>
 
 
-    <select id="describeActorsByFilmId" parameterType="java.util.Map" resultType="com.binsoft.film.controller.film.vo.ActorResultVO">
-
+    <select id="describeActorsByFilmId" parameterType="java.util.Map" resultType="com.binsoft.film.controller.film.vo.response.filmdetail.ActorResultVO">
+      SELECT
+      actor.`actor_img` AS imgAddress,
+      actor.`actor_name` As directorName,
+      rela.`role_name` AS roleName
+      FROM film_actor_rela_t rela
+      LEFT  JOIN  film_actor_t actor ON rela.`actor_id` = actor.`UUID`
+      WHERE rela.`film_id`=#{filmId}
     </select>
 </mapper>

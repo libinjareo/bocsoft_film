@@ -1,6 +1,6 @@
 package com.binsoft.film.dao.mapper;
 
-import com.binsoft.film.controller.film.vo.FilmDetailResultVO;
+import com.binsoft.film.controller.film.vo.response.filmdetail.FilmDetailResultVO;
 import com.binsoft.film.dao.entity.FilmInfoT;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
@@ -27,5 +27,5 @@ public interface FilmInfoTMapper extends BaseMapper<FilmInfoT> {
      * @param filmName
      * @return
      */
-    FilmDetailResultVO describeFilmDateailByFilmName(@Param("filmName") String filmName);
+    FilmDetailResultVO describeFilmDataillByFilmName(@Param("filmName") String filmName);
 }

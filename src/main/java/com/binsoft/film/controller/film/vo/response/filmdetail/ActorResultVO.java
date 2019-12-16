@@ -1,4 +1,4 @@
-package com.binsoft.film.controller.film.vo;
+package com.binsoft.film.controller.film.vo.response.filmdetail;
 
 import lombok.Data;
 

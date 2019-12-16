@@ -1,8 +1,9 @@
 package com.binsoft.film.dao.mapper;
 
-import com.binsoft.film.controller.film.vo.ActorResultVO;
+import com.binsoft.film.controller.film.vo.response.filmdetail.ActorResultVO;
 import com.binsoft.film.dao.entity.FilmActorT;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,5 +22,5 @@ public interface FilmActorTMapper extends BaseMapper<FilmActorT> {
      * @param filmId
      * @return
      */
-   List<ActorResultVO> describeActorsByFilmId(String filmId);
+   List<ActorResultVO> describeActorsByFilmId(@Param("filmId") String filmId);
 }

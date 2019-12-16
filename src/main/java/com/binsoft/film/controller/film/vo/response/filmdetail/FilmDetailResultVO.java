@@ -1,4 +1,4 @@
-package com.binsoft.film.controller.film.vo;
+package com.binsoft.film.controller.film.vo.response.filmdetail;
 
 import lombok.Data;
 
@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 @Data
 public class FilmDetailResultVO implements Serializable {
-    private String fileName;
+    private String filmName;
     private String filmEnName;
     private String imgAddress;
     private String score;
