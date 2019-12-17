@@ -1,5 +1,6 @@
 package com.binsoft.film.service.film;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.binsoft.film.controller.film.vo.request.DescribeFilmListReqVO;
 import com.binsoft.film.controller.film.vo.response.condition.CatInfoResultVO;
 import com.binsoft.film.controller.film.vo.response.condition.SourceInfoResultVO;
@@ -12,6 +13,7 @@ import com.binsoft.film.controller.film.vo.response.index.BannerInfoResultVO;
 import com.binsoft.film.controller.film.vo.response.index.HotFilmListResultVO;
 import com.binsoft.film.controller.film.vo.response.index.RankFilmListResultVO;
 import com.binsoft.film.controller.film.vo.response.index.SoonFilmListResultVO;
+import com.binsoft.film.dao.entity.FilmInfoT;
 import com.binsoft.film.service.common.exception.CommonServiceException;
 
 import java.util.List;
@@ -43,7 +45,7 @@ public interface FilmServiceAPI {
     List<SoonFilmListResultVO> describeSoonFilms() throws CommonServiceException;
 
     /**
-     * 票房排行
+     * 票房排行-正在热映电影top10
      *
      * @return
      * @throws CommonServiceException
@@ -96,7 +98,7 @@ public interface FilmServiceAPI {
      * @return
      * @throws CommonServiceException
      */
-    List<DescribeFilmListResultVO> describeFilms(DescribeFilmListReqVO filmListReqVO) throws CommonServiceException;
+     IPage<FilmInfoT> describeFilms(DescribeFilmListReqVO filmListReqVO) throws CommonServiceException;
 
     /**
      * 获取电影详情
@@ -115,7 +117,7 @@ public interface FilmServiceAPI {
      * @return
      * @throws CommonServiceException
      */
-    String describeFilmBio(String filmId) throws CommonServiceException;
+    String describeFilmBiography(String filmId) throws CommonServiceException;
 
     /**
      * 获取影片图片信息
