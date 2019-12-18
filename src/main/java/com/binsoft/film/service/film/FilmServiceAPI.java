@@ -15,6 +15,7 @@ import com.binsoft.film.controller.film.vo.response.index.RankFilmListResultVO;
 import com.binsoft.film.controller.film.vo.response.index.SoonFilmListResultVO;
 import com.binsoft.film.dao.entity.FilmInfoT;
 import com.binsoft.film.service.common.exception.CommonServiceException;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
 import java.util.List;
 
@@ -43,6 +44,14 @@ public interface FilmServiceAPI {
      * @throws CommonServiceException
      */
     List<SoonFilmListResultVO> describeSoonFilms() throws CommonServiceException;
+
+    /**
+     * 获取热映或即将上映的影片数量
+     * @param filmType 1-热映 2-即将上映
+     * @return
+     * @throws CommonServiceException
+     */
+    int describeIndexFilmNum(String filmType) throws CommonServiceException;
 
     /**
      * 票房排行-正在热映电影top10

@@ -40,6 +40,7 @@ public class AuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         if(request.getServletPath().equals("/auth")
                 || request.getServletPath().startsWith("/cinema")
+                || request.getServletPath().startsWith("/film")
                 || request.getServletPath().equals("/film/user/register")
                 || request.getServletPath().equals("/film/user/check")
                 || request.getServletPath().equals("/swagger-ui.html")

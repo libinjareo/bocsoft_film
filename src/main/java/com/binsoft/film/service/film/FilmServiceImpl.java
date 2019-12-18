@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FilmServiceImpl implements FilmServiceAPI {
@@ -121,6 +122,17 @@ public class FilmServiceImpl implements FilmServiceAPI {
         });
 
         return result;
+    }
+
+    @Override
+    public int describeIndexFilmNum(String filmType) throws CommonServiceException {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        if ("2".equals(filmType)) {
+            queryWrapper.eq("film_status", "2");
+        } else {
+            queryWrapper.eq("film_status", "1");
+        }
+        return filmInfoTMapper.selectCount(queryWrapper);
     }
 
     @Override
@@ -247,17 +259,63 @@ public class FilmServiceImpl implements FilmServiceAPI {
 
     @Override
     public List<CatInfoResultVO> describeCatInfos(String catId) throws CommonServiceException {
-        return null;
+
+        List<FilmCatDictT> filmCatDictTS = filmCatDictTMapper.selectList(null);
+
+        List<CatInfoResultVO> results = filmCatDictTS.stream().map((data) -> {
+            CatInfoResultVO result = new CatInfoResultVO();
+            result.setCatId(data.getUuid() + "");
+            result.setCatName(data.getShowName());
+
+            if (catId.equals(data.getUuid() + "")) {
+                result.setIsActive("true");
+            } else {
+                result.setIsActive("false");
+            }
+            return result;
+        }).collect(Collectors.toList());
+
+
+        return results;
     }
 
     @Override
     public List<SourceInfoResultVO> describeSourceInfos(String sourceId) throws CommonServiceException {
-        return null;
+        List<FilmSourceDictT> filmSourceDictTS = sourceDictTMapper.selectList(null);
+
+        List<SourceInfoResultVO> results = filmSourceDictTS.stream().map((data) -> {
+            SourceInfoResultVO result = new SourceInfoResultVO();
+            result.setSourceId(data.getUuid() + "");
+            result.setSourceName(data.getShowName());
+
+            if (sourceId.equals(data.getUuid() + "")) {
+                result.setIsActive("true");
+            } else {
+                result.setIsActive("false");
+            }
+            return result;
+        }).collect(Collectors.toList());
+
+
+        return results;
     }
 
     @Override
     public List<YearInfoResultVO> describeYearInfos(String yearId) throws CommonServiceException {
-        return null;
+        List<FilmYearDictT> filmYearDictTS = yearDictTMapper.selectList(null);
+        List<YearInfoResultVO> results = filmYearDictTS.stream().map((data) -> {
+            YearInfoResultVO result = new YearInfoResultVO();
+            result.setYearId(data.getUuid() + "");
+            result.setYearName(data.getShowName());
+            if (yearId.equals(data.getUuid() + "")) {
+                result.setIsActive("true");
+            } else {
+                result.setIsActive("false");
+            }
+            return result;
+        }).collect(Collectors.toList());
+
+        return results;
     }
 
     @Override

@@ -21,6 +21,7 @@
 
     <select id="describeFilmDetailByFilmId" parameterType="java.util.Map" resultType="com.binsoft.film.controller.film.vo.response.filmdetail.FilmDetailResultVO">
        SELECT
+            info.`uuid` as filmId,
             info.`film_name` AS filmName,
             detail.`film_en_name` AS filmEnName,
             info.`img_address` AS imgAddress,
@@ -43,6 +44,7 @@
     </select>
     <select id="describeFilmDataillByFilmName" parameterType="java.util.Map" resultType="com.binsoft.film.controller.film.vo.response.filmdetail.FilmDetailResultVO">
            SELECT
+            info.`uuid` as filmId,
             info.`film_name` AS filmName,
             detail.`film_en_name` AS filmEnName,
             info.`img_address` AS imgAddress,
