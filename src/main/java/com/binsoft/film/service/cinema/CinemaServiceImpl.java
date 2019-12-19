@@ -36,6 +36,8 @@ public class CinemaServiceImpl implements CinemaServiceAPI {
     private FilmHallDictTMapper hallDictMapper;
     @Autowired
     private FilmBrandDictTMapper brandDictMapper;
+    @Autowired
+    private FilmOrderTMapper filmOrderTMapper;
 
     @Override
     public Page<CinemaVO> describeCinemaInfo(DescribeCinemaRequestVO describeCinemaRequestVO) {
@@ -207,6 +209,12 @@ public class CinemaServiceImpl implements CinemaServiceAPI {
 
     @Override
     public FieldHallInfoVO describeHallInfoByFieldId(String fieldId) {
-        return filmFieldMapper.describeHallInfo(fieldId);
+
+        FieldHallInfoVO fieldHallInfoVO = filmFieldMapper.describeHallInfo(fieldId);
+        //调用订单接口，获取已售座位信息
+        String soldSeats = filmOrderTMapper.describeSoldSeats(fieldId);
+        fieldHallInfoVO.setSoldSeats(soldSeats);
+
+        return fieldHallInfoVO;
     }
 }

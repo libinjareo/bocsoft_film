@@ -141,6 +141,9 @@ public class FilmServiceImpl implements FilmServiceAPI {
         Page<FilmInfoT> page = new Page<>(1, 10);
         // page.setDesc("film_box_office");
 
+        OrderItem filmScoreOrderItem = OrderItem.desc("film_box_office");
+        page.addOrder(filmScoreOrderItem);
+
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("film_status", "1");
 
@@ -168,6 +171,9 @@ public class FilmServiceImpl implements FilmServiceAPI {
 
         Page<FilmInfoT> page = new Page<>(1, 10);
 
+        OrderItem filmScoreOrderItem = OrderItem.desc("film_preSaleNum");
+        page.addOrder(filmScoreOrderItem);
+
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("film_status", "2");
 
@@ -193,6 +199,10 @@ public class FilmServiceImpl implements FilmServiceAPI {
     @Override
     public List<RankFilmListResultVO> topRandFilms() throws CommonServiceException {
         Page<FilmInfoT> page = new Page<>(1, 10);
+
+        OrderItem filmScoreOrderItem = OrderItem.desc("film_score");
+        page.addOrder(filmScoreOrderItem);
+
 
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("film_status", "1");
