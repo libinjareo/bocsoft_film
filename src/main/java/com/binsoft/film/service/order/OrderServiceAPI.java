@@ -47,5 +47,5 @@ public interface OrderServiceAPI {
      * @return
      * @throws CommonServiceException
      */
-    IPage<OrderDetailResVO> describeOrderInfoByUser(String userId) throws CommonServiceException;
+    IPage<OrderDetailResVO> describeOrderInfoByUser(int nowPage,int pageSize,String userId) throws CommonServiceException;
 }

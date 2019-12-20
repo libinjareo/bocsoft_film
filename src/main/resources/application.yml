@@ -31,5 +31,8 @@ server:
 film:
   img-pre:http://img.binfilm.cn/
 
+order:
+  file-path-pre: D:/IntelliJIDEAWorkspace/springbootWorkspace/bin_film/src/main/resources/
+
 
 
